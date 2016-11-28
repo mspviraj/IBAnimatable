@@ -1,10 +1,13 @@
-osx_image: xcode8
+osx_image: xcode8.2
 language: objective-c
-script:
+before_install: 
+  - gem install danger 
+  - gem danger-swiftlint
+script: 
   - |
-    xcodebuild build \
-    -project IBAnimatable.xcodeproj \
-    -scheme IBAnimatableApp \
-    -sdk iphonesimulator \
-    -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
-  - bundle exec danger
+      xcodebuild build \
+      -project IBAnimatable.xcodeproj \
+      -scheme IBAnimatableApp \
+      -sdk iphonesimulator \
+      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
+  - danger
